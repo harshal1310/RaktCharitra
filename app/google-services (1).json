@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "833628698401",
+    "firebase_url": "https://raktcharitra-9332b-default-rtdb.firebaseio.com",
+    "project_id": "raktcharitra-9332b",
+    "storage_bucket": "raktcharitra-9332b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833628698401:android:88c539a8886274e60e7060",
+        "android_client_info": {
+          "package_name": "com.harsh1310.rakkktcharitr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833628698401-micf7ev01bterp8k6anpl7kfvv2ge15c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.harsh1310.rakkktcharitr",
+            "certificate_hash": "651209f42ae8270b260077c39a5a5a88b1f50137"
+          }
+        },
+        {
+          "client_id": "833628698401-pavsh5j9avg1vg4n6ttu1h5l8f88cfer.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-vqB5Zk3igkAdG6rD8vKDA1p-ufcld5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833628698401-pavsh5j9avg1vg4n6ttu1h5l8f88cfer.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
