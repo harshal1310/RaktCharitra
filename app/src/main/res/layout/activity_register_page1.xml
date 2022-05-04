@@ -212,14 +212,12 @@
                 android:textColorLink="#FAF3F3"
                 android:textSize="20sp"
                 android:textStyle="normal|bold" />
-
-</LinearLayout>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="7dp"></Space>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="3dp"></Space>
 
 
-        <Button
+            <Button
                 android:id="@+id/next2"
                 android:layout_width="123dp"
                 android:layout_height="wrap_content"
@@ -234,6 +232,8 @@
                 android:visibility="visible"
                 app:backgroundTint="@color/design_default_color_error"
 
-                 />
+                />
+
+</LinearLayout>
     </LinearLayout>
 </RelativeLayout>
