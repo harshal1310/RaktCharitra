@@ -19,6 +19,7 @@
         android:textStyle="bold"
         android:layout_centerVertical="true"
         android:textColor="@android:color/black"
+
         />
 
 </RelativeLayout>

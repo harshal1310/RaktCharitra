@@ -22,8 +22,8 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/status1"
-                android:layout_width="210dp"
+
+                android:layout_width="190dp"
                 android:layout_height="45dp"
                 android:layout_margin="5.00dp"
                 android:layout_weight="1"
@@ -61,7 +61,7 @@
             android:layout_height="match_parent"
 
             android:orientation="vertical"
-            android:paddingLeft="@dimen/_5sdp"
+            android:paddingLeft="5.00dp"
             android:paddingRight="@dimen/_5sdp">
 
              <Space
@@ -73,12 +73,12 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
+
                 android:background="@drawable/inpuut_bg"
                 android:backgroundTint="#fff"
                 android:drawableLeft="@drawable/ic_baseline_account_circle_24"
                 android:drawablePadding="5dp"
-                android:ems="10"
+
                 android:hint="Name:"
                 android:includeFontPadding="false"
                 android:inputType="textPersonName"
@@ -93,16 +93,20 @@
 
                 />
 
-            <EditText
+             <Space
+                 android:layout_width="match_parent"
+                 android:layout_height="8dp"></Space>
+
+             <EditText
                 android:id="@+id/emailadd"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
+
                 android:background="@drawable/textviewbg"
                 android:backgroundTint="#fff"
                 android:drawableLeft="@drawable/ic_login_email_24"
                 android:drawablePadding="5dp"
-                android:ems="20"
+
                 android:hint="Email :"
 
                 android:includeFontPadding="false"
@@ -118,17 +122,21 @@
 
                  />
 
+             <Space
+                 android:layout_width="match_parent"
+                 android:layout_height="8dp"></Space>
+
             <EditText
                 android:id="@+id/phonenumber"
 
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
+
                 android:background="@drawable/textviewbg"
                 android:backgroundTint="#fff"
                 android:drawableLeft="@drawable/ic_baseline_phone_24"
                 android:drawablePadding="5dp"
-                android:ems="20"
+
                 android:hint="Phone No:"
 
                 android:includeFontPadding="false"
@@ -143,16 +151,20 @@
                 android:textStyle="normal|bold"
                />
 
+             <Space
+                 android:layout_width="match_parent"
+                 android:layout_height="8dp"></Space>
+
              <EditText
                  android:id="@+id/pincode"
-                 android:layout_width="wrap_content"
+                 android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:layout_margin="@dimen/_5sdp"
+                 
                  android:background="@drawable/textviewbg"
                  android:backgroundTint="#fff"
                  android:drawableLeft="@drawable/ic_baseline_location_on_24"
                  android:drawablePadding="5dp"
-                 android:ems="20"
+
                  android:hint="Pincode:"
 
                  android:includeFontPadding="false"
@@ -175,9 +187,9 @@
 
 
              <LinearLayout
-                 android:layout_width="384dp"
+                 android:layout_width="match_parent"
                  android:layout_height="47dp"
-                 android:layout_marginLeft="10dp"
+
                  android:background="@drawable/textviewbg"
                  android:orientation="horizontal">
 
@@ -207,9 +219,9 @@
                  android:layout_height="12dp"></Space>
 
              <LinearLayout
-                 android:layout_width="384dp"
+                 android:layout_width="match_parent"
                  android:layout_height="47dp"
-                 android:layout_marginLeft="10dp"
+
                  android:background="@drawable/textviewbg"
                  android:orientation="horizontal">
 

@@ -85,7 +85,9 @@ return  rootview;
                 {
                     if(snapshot.child(bgrp).hasChild(searchpin.getText().toString().trim()))
                     {
-                        if(snapshot.child(bgrp).child(searchpin.getText().toString().trim()).hasChild(pref.getuserid())) {
+                       // if(snapshot.child(bgrp).child(searchpin.getText().toString().tri)
+                        {
+                            //.hasChild(pref.getuserid())) {
                             ArrayList<String> list = new ArrayList<>();
                             list.add(bgrp);
                             list.add(searchpin.getText().toString());
@@ -95,8 +97,8 @@ return  rootview;
                             startActivity(intent);
 
                         }
-                        else
-                            Toast.makeText(getActivity(),"No data Found",Toast.LENGTH_SHORT).show();
+                       // else
+                         //   Toast.makeText(getActivity(),"No data Found",Toast.LENGTH_SHORT).show();
                     }
                     else
                         Toast.makeText(getActivity(),"No data Found",Toast.LENGTH_SHORT).show();

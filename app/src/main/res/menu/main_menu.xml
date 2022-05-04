@@ -15,5 +15,10 @@
         android:title="Ourteam"
         android:icon="@drawable/ic_baseline_group_24"
         />
+    <item
+android:id="@+id/faq"
+        android:title="FAQ"
+        android:icon="@drawable/ic_baseline_branding_watermark_24"
+        />
 
 </menu>

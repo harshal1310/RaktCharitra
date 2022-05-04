@@ -77,7 +77,7 @@ pref=stored_credentials.getInstance(this);
 id=pref.getuserid();
 //Log.d("aaa",FirebaseAuth.getInstance().getCurrentUser().getUid());
 //Log.d("aa",FirebaseAuth.getInstance().getUid());
-//if(FirebaseAuth.getInstance().getCurrentUser().getUid()!=id)
+//if(pref.getlogin().equals("1")==false)
 //{
   //  Toast.makeText(Update_Status.this,"You must login ",Toast.LENGTH_SHORT).show();
 

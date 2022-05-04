@@ -29,23 +29,34 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class register_page1 extends AppCompatActivity {
-EditText bod,profession,last_bd,last_platellets,smokedisease;
+public class register_page1 extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+EditText profession,smokedisease;
+TextView bod;
+Spinner last_bdspinner,last_platelletsspinner,professionspinner,smokespinner;
 Button next2;
     String[] yesno = {"Yes","No"};
+String []last_blooddonatedarray={"Yes","No"};
+String []last_platelletarray={"Yes","No"};
+String []profarray={"Govt Employee","Pvt Employee","Professional","Student","Businessman","Others"};
+String []smokearray={"Yes","No"};
 
-String bgrp,gender;
+String bgrp,gender,lastbdstring="Yes",last_ptstring="Yes",smoketext="Yes",professionstring="Govt Employee";
+
+
     private RequestQueue mRequestQueue;
     String getdata="tt";
     TextView tv;
     private Calendar mcalendar;
 
-    private int day,month,year,age;
+    private int day,month,year,age=100;
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +67,54 @@ String bgrp,gender;
     mRequestQueue = Volley.newRequestQueue(register_page1.this);
      bod=findViewById(R.id.dateofbirth);
 
-     profession=findViewById(R.id.profession);
-     last_bd=findViewById(R.id.lastblooddonation);
-        last_platellets=findViewById(R.id.lastplateletsdonation);
-        smokedisease=findViewById(R.id.smokedrink);
-
+     professionspinner=findViewById(R.id.professionspinner);
+    // last_bd=findViewById(R.id.lastblooddonation);
+      //  last_platellets=findViewById(R.id.lastplateletsdonation);
+      //  smokedisease=findViewById(R.id.smokedrink);
+last_bdspinner=findViewById(R.id.bloodspinners);
+last_platelletsspinner=findViewById(R.id.plateletsspinners);
+smokespinner=findViewById(R.id.smokerspineer);
      next2=findViewById(R.id.next2);
+    ArrayAdapter lastbdadapter
+            = new ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            last_blooddonatedarray);
+ArrayAdapter lastplateletsadapter=new ArrayAdapter(this,android.R.layout.simple_spinner_item,last_platelletarray);
+    // set simple layout resource file
+    // for each item of spinner
+    ArrayAdapter professionadapter
+            = new ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            profarray);
 
+    ArrayAdapter smokeadapter
+            = new ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            smokearray);
+
+    lastbdadapter.setDropDownViewResource(
+            android.R.layout
+                    .simple_spinner_dropdown_item);
+    lastplateletsadapter.setDropDownViewResource(
+            android.R.layout
+                    .simple_spinner_dropdown_item);
+professionadapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+    smokeadapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+    // Set the ArrayAdapter (ad) data on the
+    // Spinner which binds data to spinner
+    last_bdspinner.setAdapter(lastbdadapter);
+last_platelletsspinner.setAdapter(lastplateletsadapter);
+professionspinner.setAdapter(professionadapter);
+smokespinner.setAdapter(smokeadapter);
+last_bdspinner.setOnItemSelectedListener(this);
+smokespinner.setOnItemSelectedListener(this);
+last_platelletsspinner.setOnItemSelectedListener(this);
 bod.setOnClickListener(v->opencal());
+
+professionspinner.setOnItemSelectedListener(this);
 //last_bd.setOnClickListener(v->opencal1());
 //last_platellets.setOnClickListener(v->opencal2());
    getDataFromPinCode(list.get(3));
@@ -71,64 +122,51 @@ bod.setOnClickListener(v->opencal());
         @Override
         public void onClick(View v) {
 
-                 if (profession.getText().toString().length() == 0) {
-                    profession.setError("Profession not entered");
-                    profession.requestFocus();
-                }
 
-           else if (bod.getText().toString().length() == 0) {
-                bod.setError("BOD not entered");
-                bod.requestFocus();
+              if(age<18||age>60)
+                 {
+                        Toast.makeText(register_page1.this,"Age should between 18 and 60",Toast.LENGTH_SHORT).show();
 
-            }
-           else  if(age<18||age>60)
-                 {
-                        bod.setError("Age should betwwen 18 and 60"+age);
-                        bod.requestFocus();
                  }
-           else if(last_bd.getText().toString().equals("Yes")==false&&last_bd.getText().toString().equals("No")==false)
-                 {
-                     last_bd.setError("should be Yes or No");
-                     last_bd.requestFocus();
-                 }
-else if(last_platellets.getText().toString().equals("Yes")==false&&last_platellets.getText().toString().equals("No")==false)
-                 {
-                     last_platellets.setError("Should be Yes or No");
-                     last_platellets.requestFocus();
-                 }
-else if(smokedisease.getText().toString().equals("Yes")==false&&smokedisease.getText().toString().equals("No")==false)
-                 {
-                     smokedisease.setError("Should be Yes or No");
-                     smokedisease.requestFocus();
-                 }
-else  if(last_bd.getText().toString().equals("No")&&last_platellets.getText().toString().equals("No"))
+           else if(lastbdstring.equals("No")&&last_ptstring.equals("No"))
                  {
                      Toast.makeText(register_page1.this,"User should be blood or platelets donor",Toast.LENGTH_SHORT).show();
-
                  }
+        //   else if(last_bd.getText().toString().equals("Yes")==false&&last_bd.getText().toString().equals("No")==false)
+          //       {
+            //         last_bd.setError("should be Yes or No");
+              //       last_bd.requestFocus();
+                // }
+//else if(last_platellets.getText().toString().equals("Yes")==false&&last_platellets.getText().toString().equals("No")==false)
+  //               {
+    //                 last_platellets.setError("Should be Yes or No");
+        //             last_platellets.requestFocus();
+      //           }
+
+//else  if(last_bd.getText().toString().equals("No")&&last_platellets.getText().toString().equals("No"))
+  //               {
+    //                 Toast.makeText(register_page1.this,"User should be blood or platelets donor",Toast.LENGTH_SHORT).show();
+
+      //           }
                 else{
-                     list.add(profession.getText().toString());
+                     list.add(professionstring);
                     list.add(bod.getText().toString());
 
-                    String lb=last_bd.getText().toString();
+                    //String lb=last_bd.getText().toString();
 
-                                list.add(lb);
-                            lb=last_platellets.getText().toString();
+                                list.add(lastbdstring);
+                      //      lb=last_platellets.getText().toString();
                      //if(lb.length()==0)
                        //  list.add("No");
                      //else
-                         list.add(lb);
-
+                         list.add(last_ptstring);
 
                  Log.d("check",getdata);
 
                     list.add(getdata);
 
-                     //if(smokedisease.getText().toString().trim().length()==0)
-                       //  list.add("No");
-                    // else
-                         list.add(smokedisease.getText().toString());
 
+                         list.add(smoketext);
 
 
 
@@ -159,6 +197,7 @@ day=mcalendar.get(Calendar.DAY_OF_MONTH);
                     bod.setText(dayOfMonth + "/" + month + "/" + year1);
                   age=  year-year1;
                     Log.d("check","a->"+age);
+                    //bod.setText();
                 }
             };
 
@@ -170,7 +209,39 @@ day=mcalendar.get(Calendar.DAY_OF_MONTH);
 
 
 
+    public  boolean validateJavaDate(String strDate)
+    {
+        /* Check if date is 'null' */
+        if (strDate.trim().equals(""))
+        {
+            return true;
+        }
+        /* Date is not 'null' */
+        else
+        {
+            /*
+             * Set preferred date format,
+             * For example MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
+            SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+            sdfrmt.setLenient(false);
+            /* Create Date object
+             * parse the string into date
+             */
+            try
+            {
+                Date javaDate = sdfrmt.parse(strDate);
 
+            }
+            /* Date format is invalid */
+            catch (ParseException e)
+            {
+                Toast.makeText(register_page1.this,"  Invalid Date format",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            /* Return true if date format is valid */
+            return true;
+        }
+    }
 
 
     private void getDataFromPinCode(String pinCode) {
@@ -247,4 +318,36 @@ day=mcalendar.get(Calendar.DAY_OF_MONTH);
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Spinner sp1=(Spinner)parent;
+
+       // Log.d("harshal",lastbdstring);
+       // Log.d("harshal",last_ptstring);
+
+        if(sp1.getId()==R.id.bloodspinners)
+        {
+           lastbdstring= last_blooddonatedarray[position];
+            Log.d("harshal",lastbdstring);
+        }
+        else if(sp1.getId()==R.id.plateletsspinners)
+        {
+
+            last_ptstring=last_platelletarray[position];
+            Log.d("harshal",last_ptstring);
+        }
+        else if(sp1.getId()==R.id.professionspinner)
+        {
+            professionstring=profarray[position];
+        }
+        else if(sp1.getId()==R.id.smokerspineer)
+        {
+            smoketext=smokearray[position];
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

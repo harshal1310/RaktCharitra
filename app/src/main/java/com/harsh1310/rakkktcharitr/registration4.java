@@ -101,7 +101,7 @@ list.add(pass);
                                 if(al.length()==0)
                                     al="No";
                                 String ds=list.get(15).trim();
-                                if(ds.length()==0)
+                               if(ds.length()==0)
                                     ds="No";
                                 String op=list.get(16).trim();
                                 if(op.length()==0)
@@ -110,7 +110,7 @@ list.add(pass);
                                 if(pickup.length()==0)
                                     pickup="No";
                                 String s;
-                                if(list.get(11)=="No")
+                                if(list.get(11).equals("No"))
                                     s="Blood Donor";
                                 else
                                     s="Blood Donor & Plasma Donor";

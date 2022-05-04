@@ -64,7 +64,7 @@
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/black"
                 android:textColorLink="#FAF3F3"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText

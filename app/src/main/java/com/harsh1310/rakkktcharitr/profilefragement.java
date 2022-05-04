@@ -34,11 +34,12 @@ public class profilefragement extends Fragment {
 stored_credentials pref;
     private GoogleApiClient mGoogleApiClient;
 
-TextView usergender,userbloodgrp,userloc,userpickup,useravailibility,usercontact;
+TextView usergender,userbloodgrp,userloc,userpickup,useravailibility,usercontact,dtype;
 CircleImageView pimg;
 Button sendmsg;
 TextView name,prof;
 ImageButton logout;
+   // stored_credentials pref;
     public profilefragement() {
         // Required empty public constructor
     }
@@ -51,7 +52,18 @@ ImageButton logout;
 pref=stored_credentials.getInstance(getActivity());
 View rootview=inflater.inflate(R.layout.fragment_profilefragement, container, false);
 logout=rootview.findViewById(R.id.logoutbtn);
-
+logout.setOnClickListener(new View.OnClickListener() {
+    //stored_credentials pref=stored_credentials.getInstance(getActivity());
+    //pref=stored_credentials.getIn(this);
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(getActivity(),"Click",Toast.LENGTH_SHORT).show();
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getActivity(),Login_activity.class));
+        pref.checkforlogin("0");
+        getActivity().finish();
+    }
+});
 name=rootview.findViewById(R.id.dname);
 prof=rootview.findViewById(R.id.dprofession);
 userbloodgrp=rootview.findViewById(R.id.dtype);
@@ -62,6 +74,7 @@ userpickup=rootview.findViewById(R.id.fdrop1);
 pimg=rootview.findViewById(R.id.dpimg);
 usercontact=rootview.findViewById(R.id.dcontact1);
 String uid= pref.getuserid();
+
 //logout.setOnClickListener(v->signout());
        // mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
          //       .enableAutoManage(getActivity()/* FragmentActivity */, (GoogleApiClient.OnConnectionFailedListener) this /* OnConnectionFailedListener */)
@@ -74,7 +87,7 @@ DatabaseReference db= FirebaseDatabase.getInstance().getReference("Users");
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
 
-         String dtpe=  snapshot.child(Constants.allergy).getValue().toString();
+         String dtpe=  snapshot.child(Constants.dtype).getValue().toString();
            userbloodgrp.setText(dtpe);
            String gender=snapshot.child(Constants.gender).getValue().toString();
            usergender.setText(gender);
@@ -90,6 +103,8 @@ DatabaseReference db= FirebaseDatabase.getInstance().getReference("Users");
 
                 Glide.with(getActivity()).load(img).into(pimg);
            name.setText(snapshot.child(Constants.name).getValue().toString());
+
+
             }
 
             @Override

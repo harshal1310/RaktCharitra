@@ -56,28 +56,31 @@
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
-
-            <EditText
-                android:id="@+id/disease"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_margin="@dimen/_5sdp"
+            <LinearLayout
+                android:layout_width="384dp"
+                android:layout_height="47dp"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/textviewbg"
-                android:backgroundTint="#fff"
-                android:drawableLeft="@drawable/ic_baseline_add_circle_24"
-                android:drawablePadding="5dp"
-                android:ems="10"
-                android:hint="If Yes then Mention."
-                android:includeFontPadding="false"
-                android:inputType="textPersonName"
-                android:padding="@dimen/_10sdp"
-                android:shadowColor="#FBFBFB"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/black"
-                android:textColorHint="@color/black"
-                android:textColorLink="#FAF3F3"
-                android:textSize="20sp"
-                android:textStyle="normal|bold" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5.00dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_baseline_add_circle_24"
+                    android:paddingTop="5dp"
+
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/diseasesspinners"
+                    android:layout_width="186dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
             <TextView
 
@@ -89,29 +92,30 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/operation"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_margin="@dimen/_5sdp"
+            <LinearLayout
+                android:layout_width="384dp"
+                android:layout_height="47dp"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/textviewbg"
-                android:backgroundTint="#fff"
-                android:drawableLeft="@drawable/ic_baseline_add_circle_24"
-                android:drawablePadding="5dp"
-                android:ems="20"
-                android:hint="If Yes what medications taken?"
+                android:orientation="horizontal">
 
-                android:includeFontPadding="false"
+                <TextView
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5.00dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_baseline_add_circle_24"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
 
-                android:padding="@dimen/_10sdp"
-                android:shadowColor="#FBFBFB"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/black"
-                android:textColorHint="@color/black"
-                android:textColorLink="#FAF3F3"
-                android:textSize="20sp"
-                android:textStyle="normal|bold" />
+                <Spinner
+                    android:id="@+id/operationspinners"
+                    android:layout_width="186dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
             <TextView
 
@@ -123,30 +127,31 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-
-
-            <EditText
-                android:id="@+id/allergy"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_margin="@dimen/_5sdp"
+            <LinearLayout
+                android:layout_width="384dp"
+                android:layout_height="47dp"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/textviewbg"
-                android:backgroundTint="#fff"
-                android:drawableLeft="@drawable/ic_baseline_add_circle_24"
-                android:drawablePadding="5dp"
-                android:ems="10"
-                android:hint="If Yes then Mention."
-                android:includeFontPadding="false"
-                android:inputType="textPersonName"
-                android:padding="@dimen/_10sdp"
-                android:shadowColor="#FBFBFB"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/black"
-                android:textColorHint="@color/black"
-                android:textColorLink="#FAF3F3"
-                android:textSize="20sp"
-                android:textStyle="normal|bold" />
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5.00dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_baseline_add_circle_24"
+                    android:paddingTop="5dp"
+
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/allergyspinners"
+                    android:layout_width="186dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
 
 
