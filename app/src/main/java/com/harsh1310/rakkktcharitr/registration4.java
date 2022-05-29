@@ -8,9 +8,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,27 +30,51 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class registration4 extends AppCompatActivity {
-EditText pickup,remarks,password,confirmpass;
+public class registration4 extends AppCompatActivity  {
+EditText remarks,password,confirmpass;
 Button signup;
 ArrayList<String>list;
     stored_credentials pref;
-@Override
+    Spinner dropickupspinner;
+    String pickdroptext="No";
+    String []pickdroparrray={"Yes","No"};
+    ArrayList<pickupmodel>pickist;
+pickadapter pkadapter;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration4);
     list = (ArrayList<String>) getIntent().getSerializableExtra("key4");
     pref=stored_credentials.getInstance(this);
 
-    for(String s:list)
-        Log.d("check",s);
-        pickup=findViewById(R.id.pickup);
+        dropickupspinner=findViewById(R.id.pickdropspineer);
         remarks=findViewById(R.id.Remarks);
         password=findViewById(R.id.password);
         confirmpass=findViewById(R.id.ConfirmPassword);
         signup=findViewById(R.id.signup);
-signup.setOnClickListener(v->createuser());
+    pickist=new ArrayList<>();
+    pickist.add(new pickupmodel("Yes"));
+    pickist.add(new pickupmodel("No"));
+    pkadapter=new pickadapter(this,pickist);
+    dropickupspinner.setAdapter(pkadapter);
+        dropickupspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                pickupmodel clickedItem = (pickupmodel) parent.getItemAtPosition(position);
+                String clickedCountryName = clickedItem.getpickup();
+                pickdroptext=clickedCountryName;
+                //  Toast.makeText(register_page1.this, clickedCountryName + " selected", Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        signup.setOnClickListener(v->createuser());
+//Intent intent=new Intent(registration4.this,Update_Status.class);
+//startActivity(intent);
     }
 
     private void createuser() {
@@ -61,11 +89,8 @@ signup.setOnClickListener(v->createuser());
         Toast.makeText(registration4.this,"Password and Confirm password should be matched",Toast.LENGTH_SHORT).show();
             return;
     }
-        String pup=pickup.getText().toString();
-        if(pup.trim().length()==0)
-            list.add("No");
-        else
-            list.add("Yes");
+        String pup;
+        list.add(pickdroptext);
         pup=remarks.getText().toString();
         if(pup.trim().length()==0)
             list.add("No");
@@ -167,7 +192,7 @@ list.add(pass);
                     }
                     DatabaseReference donors=FirebaseDatabase.getInstance().getReference(list.get(5)).child(list.get(3)).child(hmap.get("id"));
                     String s;
-                    if(list.get(11)=="No")
+                    if(list.get(11).equals("No"))
                         s="Blood Donor";
                     else
                         s="Blood Donor & Plasma Donor";
@@ -198,9 +223,11 @@ list.add(pass);
       //                      ar.add(list.get(3));
     //                        Log.d("aa",ar.get(0));
   //                              Log.d("aa",ar.get(1));
+                                pref.checkupdate("1");
                                 Intent intent = new Intent(registration4.this, Update_Status.class);
 //                            intent.putExtra("key7",ar);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 progressDialog.dismiss();
                                 Toast.makeText(registration4.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -227,4 +254,6 @@ list.add(pass);
         MimeTypeMap mimeTypeMap=MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(getContentResolver().getType(Uri.parse(list.get(6))));
     }
+
+
 }
