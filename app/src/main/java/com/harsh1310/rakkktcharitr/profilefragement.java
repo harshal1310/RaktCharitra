@@ -57,7 +57,7 @@ logout.setOnClickListener(new View.OnClickListener() {
     //pref=stored_credentials.getIn(this);
     @Override
     public void onClick(View v) {
-        Toast.makeText(getActivity(),"Click",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(),"Click",Toast.LENGTH_SHORT).show();
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(getActivity(),Login_activity.class));
         pref.checkforlogin("0");

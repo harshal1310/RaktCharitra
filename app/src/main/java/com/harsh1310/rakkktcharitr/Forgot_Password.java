@@ -57,7 +57,7 @@ Button resetbut;
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful())
-                                    Toast.makeText(Forgot_Password.this, "Done", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Forgot_Password.this, "Mail sent to registered email", Toast.LENGTH_SHORT).show();
                                 else {
                                     Toast.makeText(Forgot_Password.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                 }

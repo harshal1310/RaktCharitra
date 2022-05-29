@@ -15,6 +15,7 @@
         android:layout_height="match_parent"
 android:orientation="vertical">
         <ImageView
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:src="@drawable/p1"
@@ -43,6 +44,7 @@ android:orientation="vertical">
             android:layout_marginTop="20dp"
             android:src="@drawable/p4"
             android:id="@+id/p4"
+            android:layout_marginBottom="15dp"
             />
     </LinearLayout>
 </ScrollView>

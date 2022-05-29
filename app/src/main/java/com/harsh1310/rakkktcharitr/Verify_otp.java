@@ -41,7 +41,8 @@ ProgressDialog progressDialog;
         setContentView(R.layout.activity_verify_otp);
      //   Intent intent = getIntent();
          list = (ArrayList<String>) getIntent().getSerializableExtra("key8");
-
+        //for(String s:list)
+        //    Log.d("check",s);
         verifybtn=findViewById(R.id.buttonget_otp);
         otptext=findViewById(R.id.otptext);
      resernotp=findViewById(R.id.resendotp);
@@ -69,7 +70,7 @@ ProgressDialog progressDialog;
     }
 
     private void resendotpfn() {
-        Toast.makeText(getApplicationContext(),"Otp Sent",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"OTP Sent to registered password",Toast.LENGTH_SHORT).show();
         sendVerificationCode(list.get(13));
 
     }

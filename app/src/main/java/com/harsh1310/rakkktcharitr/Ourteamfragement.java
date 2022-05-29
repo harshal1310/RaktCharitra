@@ -24,13 +24,13 @@ ImageButton acharyabtn,atuldevbtn,prashantbtn,radhikabtn,chetanbtn,harshalbtn;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview=inflater.inflate(R.layout.fragment_ourteamfragement, container, false);
-        acharyabtn=rootview.findViewById(R.id.acharyalnk);
+       // acharyabtn=rootview.findViewById(R.id.acharyalnk);
         atuldevbtn=rootview.findViewById(R.id.atuldevlnk);
         prashantbtn=rootview.findViewById(R.id.prashantlnk);
         radhikabtn=rootview.findViewById(R.id.radhikslnk);
         chetanbtn=rootview.findViewById(R.id.chetanlnk);
         harshalbtn=rootview.findViewById(R.id.harshallnk);
-        acharyabtn.setOnClickListener(v->openacharyaln());
+       // acharyabtn.setOnClickListener(v->openacharyaln());
         atuldevbtn.setOnClickListener(v->openatullnk());
         prashantbtn.setOnClickListener(v->openprashantlnk());
         radhikabtn.setOnClickListener(v->openradhikalnk());
@@ -40,7 +40,7 @@ ImageButton acharyabtn,atuldevbtn,prashantbtn,radhikabtn,chetanbtn,harshalbtn;
     }
 
     private void openprashantlnk() {
-        String theurl = "http://google.com";
+        String theurl = "https://www.linkedin.com/in/vhatkarprash";
         Uri urlstr = Uri.parse(theurl);
         Intent urlintent = new Intent();
         urlintent.setData(urlstr);
@@ -49,7 +49,7 @@ ImageButton acharyabtn,atuldevbtn,prashantbtn,radhikabtn,chetanbtn,harshalbtn;
     }
 
     private void openchetnlnk() {
-        String theurl = "http://google.com";
+        String theurl = "https://www.linkedin.com/in/chetan-harawat-499a011a2/";
         Uri urlstr = Uri.parse(theurl);
         Intent urlintent = new Intent();
         urlintent.setData(urlstr);
@@ -58,7 +58,7 @@ ImageButton acharyabtn,atuldevbtn,prashantbtn,radhikabtn,chetanbtn,harshalbtn;
     }
 
     private void openradhikalnk() {
-        String theurl = "http://google.com";
+        String theurl = "https://www.linkedin.com/in/radhika-sanghai-2497441a2";
         Uri urlstr = Uri.parse(theurl);
         Intent urlintent = new Intent();
         urlintent.setData(urlstr);
@@ -67,7 +67,7 @@ ImageButton acharyabtn,atuldevbtn,prashantbtn,radhikabtn,chetanbtn,harshalbtn;
     }
 
     private void openatullnk() {
-        String theurl = "http://google.com";
+        String theurl = "https://www.linkedin.com/in/atuldev-arora-541070183";
         Uri urlstr = Uri.parse(theurl);
         Intent urlintent = new Intent();
         urlintent.setData(urlstr);
@@ -76,16 +76,16 @@ ImageButton acharyabtn,atuldevbtn,prashantbtn,radhikabtn,chetanbtn,harshalbtn;
     }
 
     private void openacharyaln() {
-        String theurl = "http://google.com";
-        Uri urlstr = Uri.parse(theurl);
-        Intent urlintent = new Intent();
-        urlintent.setData(urlstr);
-        urlintent.setAction(Intent.ACTION_VIEW);
-        startActivity(urlintent);
+       // String theurl = "http://google.com";
+       // Uri urlstr = Uri.parse(theurl);
+       // Intent urlintent = new Intent();
+       // urlintent.setData(urlstr);
+       // urlintent.setAction(Intent.ACTION_VIEW);
+        //startActivity(urlintent);
     }
 
     private void openhasrahlnk() {
-        String theurl = "http://google.com";
+        String theurl = "https://www.linkedin.com/in/harshal-gosavi-947313198";
         Uri urlstr = Uri.parse(theurl);
         Intent urlintent = new Intent();
         urlintent.setData(urlstr);

@@ -1,6 +1,7 @@
 package com.harsh1310.rakkktcharitr;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
@@ -8,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,13 +31,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Update_Status extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText reason,datetange;
+    EditText reason;
+    TextView datetange;
 Button save;
 FirebaseAuth auth;
 DatabaseReference users;
@@ -43,8 +53,11 @@ String id,bgrp;int year,month,day;
 Spinner grpspinner;
 Calendar mcalendar;
 int age;
+long daydiff=100,d=90;
+    Calendar cal;
     String[] courses = { "Yes","No","Maybe"};
     ArrayList<String>   ar;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,31 +87,66 @@ grpspinner=findViewById(R.id.sspinners);
 datetange.setOnClickListener(v->opencal());
         auth=FirebaseAuth.getInstance();
 pref=stored_credentials.getInstance(this);
-id=pref.getuserid();
-//Log.d("aaa",FirebaseAuth.getInstance().getCurrentUser().getUid());
-//Log.d("aa",FirebaseAuth.getInstance().getUid());
-//if(pref.getlogin().equals("1")==false)
-//{
-  //  Toast.makeText(Update_Status.this,"You must login ",Toast.LENGTH_SHORT).show();
 
-    //finish();
-//}
+id=pref.getuserid();
+String date=pref.getlastdate();
+String tmpdate="a",tmpmonth="a",tmpyear="a";
+
+
+        if(pref.getlastdate().equals("No")==false) {
+            int i = 0;
+            for (i = 0; i < date.length(); i++) {
+                if (date.charAt(i) == '/')
+                    break;
+
+                tmpdate += date.charAt(i);
+            }
+            i++;
+            for (; i < date.length(); i++) {
+                if (date.charAt(i) == '/')
+                    break;
+                tmpmonth += date.charAt(i);
+
+            }
+            i++;
+            for (; i < date.length(); i++) {
+                if (date.charAt(i) == '/')
+                    break;
+                tmpyear += date.charAt(i);
+
+            }
+
+          //  Log.d("harshal", "y->" + tmpdate);
+           // Log.d("harshal", "m->" + tmpmonth);
+            //Log.d("harshal", "d->" + tmpyear);
+            LocalDate dateBefore = LocalDate.of(Integer.parseInt(tmpyear.substring(1)), Integer.parseInt(tmpmonth.substring(1)), Integer.parseInt(tmpdate.substring(1)));
+            //29-July-2017, change this to your desired End Date
+            //Log.d("harshal", dateBefore.toString());
+            Calendar cal = Calendar.getInstance();
+
+            LocalDate dateAfter = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DAY_OF_MONTH));
+             daydiff = ChronoUnit.DAYS.between(dateBefore, dateAfter);
+            //Log.d("harshal","days->"+daydiff);
+        }
+        Log.d("check",pref.getupdate());
+if (daydiff<90)
+    reason.setText("Already blood donated");
    settime();
 save.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        if(bgrp.equals("No"))
-        {
-            if(age<0)
-            {
-                datetange.setError("Select proper date");
-                datetange.requestFocus();
-            }
-            else
-                updatestatusfun();
-        }
-        else
-            updatestatusfun();
+if(daydiff<90)
+{
+    if(bgrp.equals("No")==false)
+    {long x=90-daydiff;
+        Toast.makeText(Update_Status.this,"You can't available to donate until "+x+" Update availability to No",Toast.LENGTH_LONG).show();
+
+    }
+    else
+        updatestatusfun();
+}
+else
+        updatestatusfun();
     }
 });
 
@@ -109,11 +157,12 @@ save.setOnClickListener(new View.OnClickListener() {
         year=mcalendar.get(Calendar.YEAR);
         month=mcalendar.get(Calendar.MONTH);
         day=mcalendar.get(Calendar.DAY_OF_MONTH);
-
+month++;
         DatePickerDialog.OnDateSetListener  listener=new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year1, int month, int dayOfMonth) {
-                datetange.setText(dayOfMonth + "/" + month + "/" + year1);
+            public void onDateSet(DatePicker view, int year1, int month2, int dayOfMonth) {
+month2++;
+                datetange.setText(dayOfMonth + "/" + month2 + "/" + year1);
                 age=  year-year1;
 
             }
@@ -125,14 +174,29 @@ save.setOnClickListener(new View.OnClickListener() {
 
     private void updatestatusfun() {
 
-      // 8if (yesorno.getText().toString().length() > 0) {
+
             ArrayList<String>list=new ArrayList<>();
             String user = auth.getUid();
-            users = FirebaseDatabase.getInstance().getReference("Users");
-          //  Log.d("check",user);
-            //Log.d("check",id);
-            //Log.d("check",ar.get(0));
-        //Log.d("check",ar.get(0));
+           users = FirebaseDatabase.getInstance().getReference("Users");
+users.addListenerForSingleValueEvent(new ValueEventListener() {
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if(snapshot.hasChild(id)||pref.getupdate().equals("1")) {
+            pref.checkupdate("0");
+        }
+        else
+        {
+            Toast.makeText(Update_Status.this,"User should be login",Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
+    }
+});
 
            users.child(id).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -192,12 +256,12 @@ Log.d("check",error.getMessage());
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(this, AlertReceiver.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent,0);
-          //  Calendar c = Calendar.getInstance();
-            // c.set(Calendar.HOUR_OF_DAY, 19);
-            //c.set(Calendar.MINUTE, 14);
-            //c.set(Calendar.SECOND, 0);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+1000*60*10, 1000*60*60*24,pendingIntent);
-        }
+
+            if(daydiff>90)
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+1000*60*10, 1000*60*60*5,pendingIntent);
+        else
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+1000*60*10*daydiff, 1000*60*60*5,pendingIntent);
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

@@ -1,11 +1,13 @@
 package com.harsh1310.rakkktcharitr;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,7 +32,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -38,11 +43,11 @@ import java.util.regex.Pattern;
 
 public class Otp_activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-
+stored_credentials pref;
     // variable for our text input
     // field for phone and OTP.
     private EditText edtPhone, edtOTP;
-stored_credentials pref;
+
     // buttons for generating OTP and verifying OTP
     private Button verifyOTPBtn, generateOTPBtn;
 ProgressDialog progressDialog;
@@ -50,6 +55,7 @@ ProgressDialog progressDialog;
     private String verificationId;
     ArrayList<String>list=new ArrayList<>();
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +78,49 @@ ProgressDialog progressDialog;
         //finish();
 //progressDialog=new ProgressDialog(this);
         // setting onclick listener for generate OTP button.
-        generateOTPBtn.setOnClickListener(new View.OnClickListener() {
+
+
+        /*String date=pref.getlastdate();
+        String tmpdate="a",tmpmonth="a",tmpyear="a";
+
+
+        if(pref.getlastdate().equals("No")==false) {
+            int i = 0;
+            for (i = 0; i < date.length(); i++) {
+                if (date.charAt(i) == '/')
+                    break;
+
+                tmpdate += date.charAt(i);
+            }
+            i++;
+            for (; i < date.length(); i++) {
+                if (date.charAt(i) == '/')
+                    break;
+                tmpmonth += date.charAt(i);
+
+            }
+            i++;
+            for (; i < date.length(); i++) {
+                if (date.charAt(i) == '/')
+                    break;
+                tmpyear += date.charAt(i);
+
+            }
+
+            Log.d("harshal", "y->" + tmpdate);
+            Log.d("harshal", "m->" + tmpmonth);
+            Log.d("harshal", "d->" + tmpyear);
+            LocalDate dateBefore = LocalDate.of(Integer.parseInt(tmpyear.substring(1)), Integer.parseInt(tmpmonth.substring(1)), Integer.parseInt(tmpdate.substring(1)));
+            //29-July-2017, change this to your desired End Date
+            //Log.d("harshal", dateBefore.toString());
+            Calendar cal = Calendar.getInstance();
+
+            LocalDate dateAfter = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DAY_OF_MONTH));
+long            daydiff = ChronoUnit.DAYS.between(dateBefore, dateAfter);
+            Log.d("harshal","days->"+daydiff);
+        }*/
+
+            generateOTPBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // below line is for checking weather the user
@@ -89,8 +137,10 @@ ProgressDialog progressDialog;
                     //          progressDialog.setMessage("Processing");
                     //        progressDialog.show();
                     String phone = "+91"+edtPhone.getText().toString();
+                    Log.d("harshal",phone);
                     Intent intent = new Intent(Otp_activity.this, Verify_otp.class);
                     list.add(phone);
+
                     intent.putExtra("key8", list);
                     startActivity(intent);
                     //  sendVerificationCode(phone);

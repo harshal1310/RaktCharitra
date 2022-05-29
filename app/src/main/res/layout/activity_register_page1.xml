@@ -112,7 +112,7 @@
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_baseline_add_circle_24"
                     android:paddingTop="5dp"
-                    android:text="Last Blood Donation:"
+                    android:text="Blood Donor:"
                     android:textColor="@color/black"
                     android:textSize="19sp"
                     android:textStyle="bold" />
@@ -140,7 +140,7 @@
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_baseline_add_circle_24"
                     android:paddingTop="5dp"
-                    android:text="Last Platelets Donation:"
+                    android:text="Platelets Donor:"
                     android:textColor="@color/black"
                     android:textSize="19sp"
                     android:textStyle="bold" />

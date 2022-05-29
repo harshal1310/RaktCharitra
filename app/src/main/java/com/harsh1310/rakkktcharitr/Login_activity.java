@@ -44,6 +44,7 @@ stored_credentials pref;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
         pref=stored_credentials.getInstance(this);
+     //   Log.d("check",pref.getupdate());
         if(pref.getlogin().equals("1"))
         {Intent intent=new Intent(Login_activity.this,MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_CLEAR_TOP);
